@@ -25,3 +25,8 @@ export interface EducationProps {
   duration: string;
   school: string;
 }
+
+export interface TabSwitcherProps {
+  activeTab: "resume" | "cover-letter";
+  setActiveTab: React.Dispatch<React.SetStateAction<"resume" | "cover-letter">>;
+}

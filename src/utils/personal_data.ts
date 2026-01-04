@@ -19,7 +19,11 @@ export const personal_data = {
     link: "https://github.com/shalawfatah",
   },
   phone: { label: "Phone", source: "+1 (604) 900 7285" },
-  address: { label: "Address", source: "New Westminster, BC" },
+  address: {
+    label: "Address",
+    source: "New Westminster, BC",
+    full_address: "328 Agnes St. New Westminster, BC",
+  },
   linkedin: {
     label: "LinkedIn",
     source: "linkedin.com/in/shalawfatah",
