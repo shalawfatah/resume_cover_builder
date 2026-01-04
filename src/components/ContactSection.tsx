@@ -1,30 +1,40 @@
-interface ContactSectionProps {
-  website: string;
-  email: string;
-  github: string;
-  phone: string;
-  address: string;
-  linkedin: string;
-}
-export default function ContactSection({
-  website,
-  email,
-  github,
-  phone,
-  address,
-  linkedin,
-}: ContactSectionProps) {
+import { personal_data } from "../utils/personal_data";
+import ContactLink from "./ContactLink";
+import ContactSimple from "./ContactSimple";
+
+export default function ContactSection() {
   return (
-    <div>
-      <div className="flex flex-row items-center">
-        <p className="font-bold text-xs">Website: </p>
-        <a target="_blanket" href={website}>
-          {website}
-        </a>
+    <div className="flex flex-row justify-between my-4">
+      <div>
+        <ContactLink
+          text={personal_data.website.label}
+          source={personal_data.website.source}
+          link={personal_data.website.link}
+        />
+        <ContactSimple
+          text={personal_data.email.label}
+          source={personal_data.email.source}
+        />
+        <ContactLink
+          text={personal_data.github.label}
+          source={personal_data.github.source}
+          link={personal_data.github.link}
+        />
       </div>
-      <div className="flex flex-row items-center">
-        <p className="font-bold text-xs">Email: </p>
-        <p>{email}</p>
+      <div>
+        <ContactSimple
+          text={personal_data.phone.label}
+          source={personal_data.phone.source}
+        />
+        <ContactSimple
+          text={personal_data.address.label}
+          source={personal_data.address.source}
+        />
+        <ContactLink
+          text={personal_data.linkedin.label}
+          source={personal_data.linkedin.source}
+          link={personal_data.linkedin.link}
+        />
       </div>
     </div>
   );

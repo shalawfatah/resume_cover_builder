@@ -18,3 +18,10 @@ export interface ProjectProps {
   live_link: string;
   github_link: string;
 }
+
+export interface EducationProps {
+  title: string;
+  specialty: string;
+  duration: string;
+  school: string;
+}
