@@ -11,3 +11,10 @@ export interface JobProps {
   tasks: string[];
   techstack: string[];
 }
+
+export interface ProjectProps {
+  title: string;
+  description: string;
+  live_link: string;
+  github_link: string;
+}

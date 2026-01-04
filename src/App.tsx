@@ -4,11 +4,13 @@ import ContactLink from "./components/ContactLink";
 import ContactSimple from "./components/ContactSimple";
 import Divider from "./components/Divider";
 import Job from "./components/Job";
+import Project from "./components/Project";
 import ResumePreview from "./components/ResumePreview";
 import Skill from "./components/Skill";
 import SubHeader from "./components/SubHeader";
 import SubTitle from "./components/SubTitle";
 import Title from "./components/Title";
+import { projects } from "./utils/projects";
 import { skills } from "./utils/skills";
 
 function App() {
@@ -88,6 +90,18 @@ function App() {
           })}
         </div>
         <SubHeader text="Projects" />
+        {projects.map((item, idx) => {
+          return (
+            <div key={idx}>
+              <Project
+                title={item.title}
+                description={item.description}
+                live_link={item.live_link}
+                github_link={item.github_link}
+              />
+            </div>
+          );
+        })}
         <SubHeader text="Education" />
       </ResumePreview>
     </>
