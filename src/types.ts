@@ -40,9 +40,22 @@ export interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: React.HTMLInputTypeAttribute;
 }
 
-
 export interface FormTextAreaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
   placeholder?: string;
+}
+
+export interface JobInputProps {
+  company_name: string;
+  position: string;
+  tasks: string[];
+  techstack: string[];
+  onTasksChange: (tasks: string[]) => void;
+  onTechStackChange: (tasks: string[]) => void;
+}
+
+export interface SkillInputProps {
+  skills: string[];
+  onTechStackChange: (skills: string[]) => void;
 }
