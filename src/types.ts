@@ -1,3 +1,6 @@
+import type { InputHTMLAttributes } from "react";
+import type { TextareaHTMLAttributes } from "react";
+
 export interface ContactProps {
   text: string;
   source: string;
@@ -29,4 +32,17 @@ export interface EducationProps {
 export interface TabSwitcherProps {
   activeTab: "resume" | "cover-letter";
   setActiveTab: React.Dispatch<React.SetStateAction<"resume" | "cover-letter">>;
+}
+
+export interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  placeholder?: string;
+  type?: React.HTMLInputTypeAttribute;
+}
+
+
+export interface FormTextAreaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+  placeholder?: string;
 }
