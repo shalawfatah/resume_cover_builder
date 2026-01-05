@@ -1,6 +1,5 @@
+import { useAppSelector } from "../store/hooks";
 import { education_data } from "../utils/education";
-import { jobs_data } from "../utils/jobs_data";
-import { personal_data } from "../utils/personal_data";
 import { projects } from "../utils/projects";
 import { skills } from "../utils/skills";
 import ContactSection from "./ContactSection";
@@ -15,6 +14,8 @@ import SubTitle from "./SubTitle";
 import Title from "./Title";
 
 export default function Resume() {
+  const personal_data = useAppSelector((state) => state.personalData);
+  const jobs_data = useAppSelector((state) => state.jobsData);
   return (
     <ResumePreview>
       <Title text={personal_data.name} />

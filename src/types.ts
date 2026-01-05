@@ -8,6 +8,7 @@ export interface ContactProps {
 }
 
 export interface JobProps {
+  id?: number;
   name: string;
   position: string;
   duration: string;
