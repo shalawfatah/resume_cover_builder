@@ -4,6 +4,7 @@ import jobsDataReducer from "./jobsDataSlice";
 import coverDataReducer from "./coverDataSlice";
 import educationDataReducer from "./educationDataSlice";
 import projectDataReducer from "./projectsDataSlice";
+import skillsDataReducer from "./skillsDataSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     coverData: coverDataReducer,
     educationData: educationDataReducer,
     projectData: projectDataReducer,
+    skillsData: skillsDataReducer,
   },
 });
 

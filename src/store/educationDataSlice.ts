@@ -1,23 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { EducationProps } from "../types";
+import { education_data } from "../utils/education";
 
-const initialState: EducationProps[] = [
-  {
-    id: 1,
-    title: "Masters in Business Administration",
-    specialty: "Project Management",
-    school: "AUIS",
-    duration: "2015 - 2017",
-  },
-  {
-    id: 2,
-    title: "Bachelor in Arts",
-    specialty: "International Studies",
-    school: "AUIS",
-    duration: "2009 - 2013",
-  },
-];
+const initialState: EducationProps[] = education_data;
 
 const educationDataSlice = createSlice({
   name: "educationData",

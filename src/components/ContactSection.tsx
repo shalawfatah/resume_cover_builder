@@ -1,8 +1,9 @@
-import { personal_data } from "../utils/personal_data";
+import { useAppSelector } from "../store/hooks";
 import ContactLink from "./ContactLink";
 import ContactSimple from "./ContactSimple";
 
 export default function ContactSection() {
+  const personal_data = useAppSelector((state) => state.personalData);
   return (
     <div className="flex flex-row justify-between my-4">
       <div>

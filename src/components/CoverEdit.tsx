@@ -3,9 +3,10 @@ import ResumePreview from "./ResumePreview";
 import SubHeader from "./SubHeader";
 import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
-import { cover_data } from "../utils/cover_data";
+import { useAppSelector } from "../store/hooks";
 
 export default function CoverEdit() {
+  const cover_data = useAppSelector((state) => state.coverData);
   const [company, setCompany] = useState(cover_data.company);
   const [content, setContent] = useState(cover_data.content);
 

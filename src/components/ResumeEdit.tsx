@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { jobs_data } from "../utils/jobs_data";
 import ExperienceEdit from "./ExperienceEdit";
 import SkillEdit from "./SkillEdit";
 import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
 import ResumePreview from "./ResumePreview";
 import SubHeader from "./SubHeader";
+import { useAppSelector } from "../store/hooks";
 
 export default function ResumeEdit() {
+  const jobs_data = useAppSelector((state) => state.jobsData);
   const [jobs, setJobs] = useState(jobs_data);
   const [skills, setSkills] = useState<string[]>([]);
 
