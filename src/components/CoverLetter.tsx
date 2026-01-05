@@ -1,5 +1,4 @@
-import { cover_data } from "../utils/cover_data";
-import { personal_data } from "../utils/personal_data";
+import { useAppSelector } from "../store/hooks";
 import ResumePreview from "./ResumePreview";
 
 export default function CoverLetter() {
@@ -11,6 +10,8 @@ export default function CoverLetter() {
     day: "numeric",
   }).format(date);
 
+  const personal_data = useAppSelector((state) => state.personalData);
+  const cover_data = useAppSelector((state) => state.coverData);
   return (
     <ResumePreview>
       <div>

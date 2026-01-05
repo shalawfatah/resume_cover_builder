@@ -24,6 +24,7 @@ export interface ProjectProps {
 }
 
 export interface EducationProps {
+  id?: number;
   title: string;
   specialty: string;
   duration: string;
@@ -60,3 +61,8 @@ export interface SkillInputProps {
   skills: string[];
   onTechStackChange: (skills: string[]) => void;
 }
+
+export type CoverData = {
+  company: string;
+  content: string;
+};
