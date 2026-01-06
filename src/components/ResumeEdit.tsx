@@ -7,19 +7,33 @@ import SubHeader from "./SubHeader";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { updateJob } from "../store/jobsDataSlice";
 import { setSkills } from "../store/skillsDataSlice";
+import { updateExpertise, updateSummary } from "../store/personalDataSlice"; // ADD THIS
 
 export default function ResumeEdit() {
   const dispatch = useAppDispatch();
   const jobs_data = useAppSelector((state) => state.jobsData);
-  const skills = useAppSelector((state) => state.skillsData); // READ FROM REDUX
+  const personal_data = useAppSelector((state) => state.personalData);
+  const skills = useAppSelector((state) => state.skillsData);
 
   return (
     <ResumePreview>
       <div className="w-full min-w-[400px]">
         <SubHeader text="Edit Resume" />
         <SubHeader text="Summary" />
-        <FormInput label="Title" placeholder="Senior Frontend Developer" />
-        <FormTextArea label="Professional Summary" />
+
+        <FormInput
+          label="Title"
+          placeholder="Senior Frontend Developer"
+          value={personal_data.expertise}
+          onChange={(e) => dispatch(updateExpertise(e.target.value))}
+        />
+
+        <FormTextArea
+          label="Professional Summary"
+          value={personal_data.summary}
+          onChange={(e) => dispatch(updateSummary(e.target.value))}
+        />
+
         <SubHeader text="Experience" />
         {jobs_data.map((item) => (
           <div key={item.id}>
@@ -47,6 +61,7 @@ export default function ResumeEdit() {
             />
           </div>
         ))}
+
         <SubHeader text="Skills" />
         <div className="mb-4">
           <SkillEdit
