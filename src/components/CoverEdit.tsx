@@ -24,7 +24,7 @@ export default function CoverEdit() {
           placeholder="Write your cover letter here..."
           value={cover_data.content}
           onChange={(e) => dispatch(updateContent(e.target.value))}
-          rows={10}
+          rows={20}
         />
       </div>
     </ResumePreview>

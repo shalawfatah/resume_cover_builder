@@ -59,7 +59,7 @@ export default function ExperienceEdit({
 
       <p className="text-xs text-slate-500">One responsibility per line</p>
       <textarea
-        rows={5}
+        rows={10}
         value={localTasks}
         placeholder="Built reusable React components
 Integrated REST APIs

@@ -32,6 +32,7 @@ export default function ResumeEdit() {
           label="Professional Summary"
           value={personal_data.summary}
           onChange={(e) => dispatch(updateSummary(e.target.value))}
+          rows={7}
         />
 
         <SubHeader text="Experience" />
