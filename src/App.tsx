@@ -1,15 +1,19 @@
 import { useState } from "react";
 import TabSwitcher from "./components/TabSwitcher";
+import ModeSwitcher from "./components/ModeSwitcher";
 import Resume from "./components/Resume";
 import CoverLetter from "./components/CoverLetter";
 import ResumeEdit from "./components/ResumeEdit";
 import CoverEdit from "./components/CoverEdit";
 import JobPosting from "./components/JobPosting";
 
+type Mode = "view" | "edit" | "both";
+
 function App() {
   const [activeTab, setActiveTab] = useState<"resume" | "cover-letter">(
     "resume",
   );
+  const [activeMode, setActiveMode] = useState<Mode>("view");
   const [isJobPostingOpen, setIsJobPostingOpen] = useState(false);
 
   return (
@@ -22,22 +26,24 @@ function App() {
       </button>
 
       <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+      <ModeSwitcher activeMode={activeMode} setActiveMode={setActiveMode} />
 
-      <main className="flex justify-center">
+      <main className="flex justify-center gap-4">
         {activeTab === "resume" ? (
           <>
-            <ResumeEdit />
-            <Resume />
+            {(activeMode === "edit" || activeMode === "both") && <ResumeEdit />}
+            {(activeMode === "view" || activeMode === "both") && <Resume />}
           </>
         ) : (
           <>
-            <CoverEdit />
-            <CoverLetter />
+            {(activeMode === "edit" || activeMode === "both") && <CoverEdit />}
+            {(activeMode === "view" || activeMode === "both") && (
+              <CoverLetter />
+            )}
           </>
         )}
       </main>
 
-      {/* Job Posting Modal */}
       <JobPosting
         isOpen={isJobPostingOpen}
         onClose={() => setIsJobPostingOpen(false)}
