@@ -1,8 +1,7 @@
-// components/JobPosting.tsx
 import { useState } from "react";
-import { ollamaService } from "../services/ollamaService";
 import { buildJobAnalysisPrompt } from "../utils/jobAnalysisPrompt";
 import type { JobAnalysis, JobPostingProps } from "../types";
+import { geminiService } from "../services/gemniService";
 
 export default function JobPosting({
   isOpen,
@@ -22,7 +21,7 @@ export default function JobPosting({
 
     try {
       // Test connection first
-      const isConnected = await ollamaService.testConnection();
+      const isConnected = await geminiService.testConnection();
       if (!isConnected) {
         throw new Error(
           "Cannot connect to Ollama. Make sure it's running on http://localhost:11434",
@@ -33,7 +32,7 @@ export default function JobPosting({
       const prompt = buildJobAnalysisPrompt(jobText);
 
       // Get response from Ollama
-      response = await ollamaService.generateResponse(prompt);
+      response = await geminiService.generateResponse(prompt);
 
       // Clean the response - remove markdown code blocks
       let cleanedResponse = response.trim();
