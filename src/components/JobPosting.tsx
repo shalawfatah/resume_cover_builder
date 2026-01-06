@@ -23,9 +23,7 @@ export default function JobPosting({
       // Test connection first
       const isConnected = await geminiService.testConnection();
       if (!isConnected) {
-        throw new Error(
-          "Cannot connect to Ollama. Make sure it's running on http://localhost:11434",
-        );
+        throw new Error("Cannot connect to Gemini.");
       }
 
       // Generate the prompt
