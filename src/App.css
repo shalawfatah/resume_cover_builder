@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -47,5 +46,31 @@ select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  /* Hide everything except the cover letter */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Only show the cover letter content */
+  .print-content,
+  .print-content * {
+    visibility: visible;
+  }
+
+  /* Remove margins for full page */
+  @page {
+    margin: 1cm;
+  }
+
+  /* Ensure proper page breaks */
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
   }
 }

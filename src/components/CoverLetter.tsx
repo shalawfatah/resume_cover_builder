@@ -1,37 +1,73 @@
 import { useAppSelector } from "../store/hooks";
 import ResumePreview from "./ResumePreview";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 export default function CoverLetter() {
+  const componentRef = useRef<HTMLDivElement>(null);
+
   const date = new Date();
   const formatted = new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
     month: "long",
     day: "numeric",
   }).format(date);
+
   const personal_data = useAppSelector((state) => state.personalData);
   const cover_data = useAppSelector((state) => state.coverData);
 
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef, // Changed from 'content' to 'contentRef'
+    documentTitle: `${personal_data.name}_Cover_Letter_${cover_data.company}`,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 25mm;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    `,
+  });
+
   return (
-    <ResumePreview>
-      <div>
-        <h2 className="text-xl font-bold my-4">{personal_data.name}</h2>
-        <p className="text-xs flex gap-x-4">
-          <span>{personal_data.address.full_address} </span>|{" "}
-          <span>{personal_data.phone.source} </span>|{" "}
-          <span>{personal_data.email.source} </span>
-        </p>
-        <p className="text-xs">{formatted}</p>
-      </div>
-      <div className="my-24">
-        <p className="font-bold">Dear {cover_data.company} Hiring Team,</p>
-        <p className="my-2 leading-8 whitespace-pre-wrap">
-          {cover_data.content}
-        </p>
-      </div>
-      <div>
-        <p>Sincerely,</p>
-        <p>{personal_data.name}</p>
-      </div>
-    </ResumePreview>
+    <>
+      <button
+        onClick={handlePrint}
+        className="absolute right-8 top-8 mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer print:hidden"
+      >
+        Download as PDF
+      </button>
+
+      <ResumePreview>
+        <div ref={componentRef} className="bg-white p-8">
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-2">{personal_data.name}</h2>
+            <p className="text-sm mb-1">
+              {personal_data.address.full_address} |{" "}
+              {personal_data.phone.source} | {personal_data.email.source}
+            </p>
+            <p className="text-sm">{formatted}</p>
+          </div>
+
+          <div className="mb-12">
+            <p className="font-semibold mb-4">
+              Dear {cover_data.company} Hiring Team,
+            </p>
+            <p className="text-base leading-relaxed whitespace-pre-wrap mb-8">
+              {cover_data.content}
+            </p>
+          </div>
+
+          <div>
+            <p className="mb-1">Sincerely,</p>
+            <p className="font-semibold">{personal_data.name}</p>
+          </div>
+        </div>
+      </ResumePreview>
+    </>
   );
 }

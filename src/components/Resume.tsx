@@ -9,68 +9,100 @@ import Skill from "./Skill";
 import SubHeader from "./SubHeader";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 export default function Resume() {
+  const componentRef = useRef<HTMLDivElement>(null);
+
   const personal_data = useAppSelector((state) => state.personalData);
   const jobs_data = useAppSelector((state) => state.jobsData);
   const education_data = useAppSelector((state) => state.educationData);
   const projects = useAppSelector((state) => state.projectData);
   const skills = useAppSelector((state) => state.skillsData);
-  return (
-    <ResumePreview>
-      <Title text={personal_data.name} />
-      <SubTitle text={personal_data.expertise} />
-      <Divider />
-      <SubHeader text="Summary" />
-      <p>{personal_data.summary}</p>
-      <ContactSection />
-      <SubHeader text="Experience" />
-      {jobs_data.map((item) => {
-        return (
-          <div key={item.id}>
-            <Job
-              name={item.name}
-              position={item.position}
-              duration={item.duration}
-              tasks={item.tasks}
-              techstack={item.techstack}
-            />
-          </div>
-        );
-      })}
 
-      <SubHeader text="Skills" />
-      <div className="flex flex-row gap-2 flex-wrap my-4">
-        {skills.map((item, idx) => {
-          return <div key={idx}>{<Skill item={item} />}</div>;
-        })}
-      </div>
-      <SubHeader text="Projects" />
-      {projects.map((item, idx) => {
-        return (
-          <div key={idx}>
-            <Project
-              title={item.title}
-              description={item.description}
-              live_link={item.live_link}
-              github_link={item.github_link}
-            />
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+    documentTitle: `${personal_data.name}_Resume`,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    `,
+  });
+
+  return (
+    <>
+      <button
+        onClick={handlePrint}
+        className="absolute top-8 right-8 mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer print:hidden"
+      >
+        Download Resume as PDF
+      </button>
+
+      <ResumePreview>
+        <div ref={componentRef}>
+          <Title text={personal_data.name} />
+          <SubTitle text={personal_data.expertise} />
+          <Divider />
+          <SubHeader text="Summary" />
+          <p>{personal_data.summary}</p>
+          <ContactSection />
+          <SubHeader text="Experience" />
+          {jobs_data.map((item) => {
+            return (
+              <div key={item.id}>
+                <Job
+                  name={item.name}
+                  position={item.position}
+                  duration={item.duration}
+                  tasks={item.tasks}
+                  techstack={item.techstack}
+                />
+              </div>
+            );
+          })}
+          <SubHeader text="Skills" />
+          <div className="flex flex-row gap-2 flex-wrap my-4">
+            {skills.map((item, idx) => {
+              return <div key={idx}>{<Skill item={item} />}</div>;
+            })}
           </div>
-        );
-      })}
-      <SubHeader text="Education" />
-      {education_data.map((item) => {
-        return (
-          <div key={item.id}>
-            <Education
-              title={item.title}
-              specialty={item.specialty}
-              school={item.school}
-              duration={item.duration}
-            />
-          </div>
-        );
-      })}
-    </ResumePreview>
+          <SubHeader text="Projects" />
+          {projects.map((item, idx) => {
+            return (
+              <div key={idx}>
+                <Project
+                  title={item.title}
+                  description={item.description}
+                  live_link={item.live_link}
+                  github_link={item.github_link}
+                />
+              </div>
+            );
+          })}
+          <SubHeader text="Education" />
+          {education_data.map((item) => {
+            return (
+              <div key={item.id}>
+                <Education
+                  title={item.title}
+                  specialty={item.specialty}
+                  school={item.school}
+                  duration={item.duration}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </ResumePreview>
+    </>
   );
 }
