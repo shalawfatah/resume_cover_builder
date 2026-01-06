@@ -1,16 +1,17 @@
-import { useState } from "react";
 import ExperienceEdit from "./ExperienceEdit";
 import SkillEdit from "./SkillEdit";
 import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
 import ResumePreview from "./ResumePreview";
 import SubHeader from "./SubHeader";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { updateJob } from "../store/jobsDataSlice";
+import { setSkills } from "../store/skillsDataSlice";
 
 export default function ResumeEdit() {
+  const dispatch = useAppDispatch();
   const jobs_data = useAppSelector((state) => state.jobsData);
-  const [jobs, setJobs] = useState(jobs_data);
-  const [skills, setSkills] = useState<string[]>([]);
+  const skills = useAppSelector((state) => state.skillsData); // READ FROM REDUX
 
   return (
     <ResumePreview>
@@ -19,9 +20,8 @@ export default function ResumeEdit() {
         <SubHeader text="Summary" />
         <FormInput label="Title" placeholder="Senior Frontend Developer" />
         <FormTextArea label="Professional Summary" />
-
         <SubHeader text="Experience" />
-        {jobs.map((item) => (
+        {jobs_data.map((item) => (
           <div key={item.id}>
             <ExperienceEdit
               company_name={item.name}
@@ -29,28 +29,31 @@ export default function ResumeEdit() {
               tasks={item.tasks}
               techstack={item.techstack}
               onTasksChange={(newTasks) => {
-                setJobs((prev) =>
-                  prev.map((job) =>
-                    job.id === item.id ? { ...job, tasks: newTasks } : job,
-                  ),
+                dispatch(
+                  updateJob({
+                    ...item,
+                    tasks: newTasks,
+                  }),
                 );
               }}
               onTechStackChange={(newTech) => {
-                setJobs((prev) =>
-                  prev.map((job) =>
-                    job.id === item.id ? { ...job, techstack: newTech } : job,
-                  ),
+                dispatch(
+                  updateJob({
+                    ...item,
+                    techstack: newTech,
+                  }),
                 );
               }}
             />
           </div>
         ))}
-
         <SubHeader text="Skills" />
         <div className="mb-4">
           <SkillEdit
             skills={skills}
-            onTechStackChange={(newSkills) => setSkills(newSkills)}
+            onTechStackChange={(newSkills) => {
+              dispatch(setSkills(newSkills));
+            }}
           />
         </div>
       </div>
