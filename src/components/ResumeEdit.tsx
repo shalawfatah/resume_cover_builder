@@ -17,8 +17,7 @@ export default function ResumeEdit() {
 
   return (
     <ResumePreview>
-      <div className="w-full min-w-[400px]">
-        <SubHeader text="Edit Resume" />
+      <div>
         <SubHeader text="Summary" />
 
         <FormInput

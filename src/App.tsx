@@ -6,16 +6,24 @@ import CoverLetter from "./components/CoverLetter";
 import ResumeEdit from "./components/ResumeEdit";
 import CoverEdit from "./components/CoverEdit";
 import JobPosting from "./components/JobPosting";
+import type { JobAnalysis } from "./types";
+import { handleJobAnalysis } from "./handlers/jobAnalsisHanlder";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 
 type Mode = "view" | "edit" | "both";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const currentState = useAppSelector((state) => state);
   const [activeTab, setActiveTab] = useState<"resume" | "cover-letter">(
     "resume",
   );
   const [activeMode, setActiveMode] = useState<Mode>("view");
   const [isJobPostingOpen, setIsJobPostingOpen] = useState(false);
 
+  const handleAnalysisComplete = (analysis: JobAnalysis) => {
+    handleJobAnalysis(analysis, dispatch, currentState, setActiveMode);
+  };
   return (
     <div className="min-h-screen bg-zinc-100 py-8 px-4 relative">
       <button
@@ -24,11 +32,9 @@ function App() {
       >
         Job Posting
       </button>
-
       <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
       <ModeSwitcher activeMode={activeMode} setActiveMode={setActiveMode} />
-
-      <main className="flex justify-center gap-4">
+      <main className="flex justify-center flex-wrap gap-1">
         {activeTab === "resume" ? (
           <>
             {(activeMode === "edit" || activeMode === "both") && <ResumeEdit />}
@@ -43,11 +49,11 @@ function App() {
           </>
         )}
       </main>
-
       <JobPosting
         isOpen={isJobPostingOpen}
         onClose={() => setIsJobPostingOpen(false)}
-      />
+        onAnalysisComplete={handleAnalysisComplete} // ADD THIS LINE
+      />{" "}
     </div>
   );
 }

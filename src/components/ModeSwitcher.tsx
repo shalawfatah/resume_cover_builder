@@ -16,8 +16,8 @@ export default function ModeSwitcher({
   ];
 
   return (
-    <div className="flex justify-center my-1">
-      <div className="bg-white p-1.5 rounded-xl shadow-sm border border-slate-200 inline-flex gap-1">
+    <div className="flex justify-center">
+      <div className="bg-white p-1.5 rounded-xl rounded-t-none shadow-sm border border-slate-200 inline-flex gap-1">
         {modes.map((mode) => (
           <button
             key={mode.key}

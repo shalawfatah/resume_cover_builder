@@ -66,3 +66,31 @@ export type CoverData = {
   company: string;
   content: string;
 };
+
+export type OllamaRequest = {
+  model: string;
+  prompt: string;
+  stream?: boolean;
+};
+
+export type OllamaResponse = {
+  model: string;
+  response: string;
+  done: boolean;
+};
+
+export type JobPostingProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onAnalysisComplete: (analysis: JobAnalysis) => void;
+};
+
+export type JobAnalysis = {
+  suggestedTitle: string;
+  suggestedSummary: string;
+  keySkills: string[];
+  companyName: string;
+  coverLetterContent: string; // ADD THIS
+  keyResponsibilities: string[];
+  requiredExperience: string;
+};

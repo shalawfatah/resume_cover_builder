@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export default function ResumePreview({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-zinc-100 p-4 md:p-12 min-h-screen">
+    <div className="bg-zinc-100 p-4 md:p-12">
       <div
         className="
         mx-auto

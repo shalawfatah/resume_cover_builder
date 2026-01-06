@@ -11,7 +11,7 @@ export default function TabSwitcher({
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white p-1.5 rounded-xl shadow-sm border border-slate-200 inline-flex gap-1">
+      <div className="bg-white p-1.5 rounded-xl rounded-b-none shadow-sm border border-slate-200 inline-flex gap-1">
         {tabs.map((tab) => (
           <button
             key={tab.id}
