@@ -40,15 +40,14 @@ export default function Resume() {
 
   return (
     <>
-      <button
-        onClick={handlePrint}
-        className="absolute top-8 right-8 mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer print:hidden"
-      >
-        Download Resume as PDF
-      </button>
-
       <ResumePreview>
-        <div ref={componentRef}>
+        <div ref={componentRef} className="relative">
+          <button
+            onClick={handlePrint}
+            className="absolute -top-16 -left-16 bg-green-600 font-bold hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm cursor-pointer print:hidden"
+          >
+            Download as PDF
+          </button>
           <Title text={personal_data.name} />
           <SubTitle text={personal_data.expertise} />
           <Divider />

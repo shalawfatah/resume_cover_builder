@@ -11,7 +11,10 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-zinc-100 py-8 px-4">
+    <div className="min-h-screen bg-zinc-100 py-8 px-4 relative">
+      <p className="px-6 py-2 text-sm font-semibold rounded-lg transition-all cursor-pointer duration-200 absolute top-0 left-16 bg-indigo-600 rounded-t-none text-white">
+        Job Posting
+      </p>
       <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
       <main className="flex justify-center">
         {activeTab === "resume" ? (
