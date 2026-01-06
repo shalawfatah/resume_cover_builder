@@ -11,18 +11,18 @@ export const personal_data = {
   },
   email: {
     label: "Email",
-    source: "shalaw.fatah@gmail.com",
+    source: "someemail@gmail.com",
   },
   github: {
     label: "Github",
     source: "github.com/shalawfatah",
     link: "https://github.com/shalawfatah",
   },
-  phone: { label: "Phone", source: "+1 (604) 900 7285" },
+  phone: { label: "Phone", source: "+1 (604) 000 0000" },
   address: {
     label: "Address",
     source: "New Westminster, BC",
-    full_address: "328 Agnes St. New Westminster, BC",
+    full_address: "333 Example St. New Westminster, BC",
   },
   linkedin: {
     label: "LinkedIn",
